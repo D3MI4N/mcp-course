@@ -1,0 +1,20 @@
+[
+  {
+    "timestamp": "2025-08-18T13:54:21.008730",
+    "event_type": "unknown",
+    "action": "completed",
+    "workflow_run": {
+      "name": "CI",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/D3MI4N/mcp-course/actions/runs/123",
+      "run_number": 42,
+      "updated_at": "2025-08-18T11:00:00Z",
+      "head_branch": "develop",
+      "head_sha": "7109307"
+    },
+    "check_run": null,
+    "repository": "D3MI4N/mcp-course",
+    "sender": null
+  }
+]

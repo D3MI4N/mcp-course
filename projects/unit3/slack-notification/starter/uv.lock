@@ -628,6 +628,7 @@ source = { editable = "." }
 dependencies = [
     { name = "aiohttp" },
     { name = "mcp", extra = ["cli"] },
+    { name = "python-dotenv" },
     { name = "requests" },
 ]
 
@@ -649,6 +650,7 @@ requires-dist = [
     { name = "mcp", extras = ["cli"], specifier = ">=1.0.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.3.0" },
     { name = "pytest-asyncio", marker = "extra == 'dev'", specifier = ">=0.21.0" },
+    { name = "python-dotenv", specifier = ">=1.1.1" },
     { name = "requests", specifier = ">=2.32.0,<3.0.0" },
 ]
 provides-extras = ["dev"]

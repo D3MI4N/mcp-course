@@ -14,6 +14,8 @@ import requests
 from mcp.types import TextContent
 
 from mcp.server.fastmcp import FastMCP
+from dotenv import load_dotenv
+load_dotenv()
 
 # Initialize the FastMCP server
 mcp = FastMCP("pr-agent-slack")
@@ -254,12 +256,14 @@ def send_slack_notification(message: str) -> str:
         return "Error: SLACK_WEBHOOK_URL environment variable not set"
     
     try:
+        # TODO: Send POST request to webhook_url
         payload = {
             "text": message,
             "mrkdwn": True  # Enable Markdown formatting
         }
+        # TODO: Include message in JSON payload with "mrkdwn": true
         response = requests.post(webhook_url, json=payload)
-        
+        # TODO: Handle response and return status
         if response.status_code == 200:
             return "Message sent successfully to Slack"
         else:
