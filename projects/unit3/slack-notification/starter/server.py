@@ -9,6 +9,9 @@ import os
 import subprocess
 from typing import Optional
 from pathlib import Path
+import requests
+
+from mcp.types import TextContent
 
 from mcp.server.fastmcp import FastMCP
 
@@ -240,28 +243,31 @@ async def get_workflow_status(workflow_name: Optional[str] = None) -> str:
 # ===== New Module 3: Slack Integration Tools =====
 
 @mcp.tool()
-async def send_slack_notification(message: str) -> str:
+def send_slack_notification(message: str) -> str:
     """Send a formatted notification to the team Slack channel.
     
     Args:
-        message: The message to send to Slack (supports Slack markdown)
+        message: The message to send to Slack
     """
     webhook_url = os.getenv("SLACK_WEBHOOK_URL")
     if not webhook_url:
         return "Error: SLACK_WEBHOOK_URL environment variable not set"
     
     try:
-        # TODO: Import requests library
-        # TODO: Send POST request to webhook_url with JSON payload
-        # TODO: Include the message in the JSON data
-        # TODO: Handle the response and return appropriate status
+        payload = {
+            "text": message,
+            "mrkdwn": True  # Enable Markdown formatting
+        }
+        response = requests.post(webhook_url, json=payload)
         
-        # For now, return a placeholder
-        return f"TODO: Implement Slack webhook POST request for message: {message[:50]}..."
-        
+        if response.status_code == 200:
+            return "Message sent successfully to Slack"
+        else:
+            return f"Failed to send message: {response.status_code} - {response.text}"
+    except requests.RequestException as e:
+        return f"Error sending message: Network issue - {str(e)}"
     except Exception as e:
         return f"Error sending message: {str(e)}"
-
 
 # ===== New Module 3: Slack Formatting Prompts =====
 
